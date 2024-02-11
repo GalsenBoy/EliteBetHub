@@ -29,6 +29,10 @@ yarn-error.log*
 .env*.local
 .env
 
+#db
+elite.db
+elite.db-journal
+
 # vercel
 .vercel
 
