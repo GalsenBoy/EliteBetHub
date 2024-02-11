@@ -1,7 +1,19 @@
 import LoginButton from "@/components/LoginButton";
-import Image from "next/image";
+import SignOutButton from "@/components/SignOutButton";
+import { authOptions } from "@/pages/api/auth/[...nextauth]";
+import { getServerSession } from "next-auth";
 
-export default function Home() {
+export default async function Home() {
+  const session = await getServerSession(authOptions);
+  if (session) {
+    return (
+      <div>
+        <p>{JSON.stringify(session, null, 2)}</p>
+        <SignOutButton />
+      </div>
+    );
+  }
+
   return (
     <div>
       <h1 className="text-xl text-red-400">Hello Billy</h1>
