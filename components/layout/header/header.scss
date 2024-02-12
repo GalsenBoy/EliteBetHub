@@ -1,0 +1,15 @@
+@import "@/mixins";
+
+header {
+    background-color: var(--background-one);
+
+    div {
+        @include flexSpaceBetween();
+        @include AlignCenter;
+        padding: 1em;
+
+        h1 {
+            font-size: 2.2em;
+        }
+    }
+}
