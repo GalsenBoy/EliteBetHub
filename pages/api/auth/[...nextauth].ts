@@ -1,7 +1,7 @@
+import { PrismaAdapter } from "@next-auth/prisma-adapter"
 import NextAuth, { NextAuthOptions } from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
-
-
+import prisma from "@/prisma/db"
 export const authOptions = {
     // secret: process.env.NEXTAUTH_SECRET,
     providers: [
@@ -11,6 +11,14 @@ export const authOptions = {
         }),
         // ...add more providers here
     ],
+    adapter: PrismaAdapter(prisma),
+    callbacks: {
+        async session({ session, user }) {
+            session.user.id = user.id
+            return session
+        }
+    }
+
 } satisfies NextAuthOptions
 
 export default NextAuth(authOptions)
