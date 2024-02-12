@@ -11,7 +11,13 @@ export const authOptions = {
         }),
         // ...add more providers here
     ],
-    adapter: PrismaAdapter(prisma)
+    adapter: PrismaAdapter(prisma),
+    callbacks: {
+        async session({ session, user }) {
+            session.user.id = user.id
+            return session
+        }
+    }
 
 } satisfies NextAuthOptions
 
