@@ -9,6 +9,7 @@ export default async function Home() {
     return (
       <div>
         <p>{JSON.stringify(session, null, 2)}</p>
+        <p>{session.user?.id}</p>
         <SignOutButton />
       </div>
     );
