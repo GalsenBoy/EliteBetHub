@@ -6,7 +6,7 @@ header {
     div {
         @include flexSpaceBetween();
         @include AlignCenter;
-        padding: 1em;
+        padding: .8em;
 
         h1 {
             font-size: 2.2em;
