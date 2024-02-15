@@ -1,6 +1,8 @@
+"use client";
 import Button from "@/components/button/Button";
 import TemplateScore from "./TemplateScore";
-import { randomOne, randomTwo } from "@/lib/randonFloat";
+import React from "react";
+// import { randomOne, randomTwo } from "@/lib/randonFloat";
 
 type TeamScoreProps = {
   leagueLogoHome: string;
@@ -19,6 +21,8 @@ export default function TeamScore({
   goalHome,
   goalAway,
 }: TeamScoreProps) {
+  const randomHome = React.useMemo(() => Math.random() * 10, []);
+  const randomAway = React.useMemo(() => Math.random() * 10, []);
   return (
     <section className="flex  space-x-6">
       <div>
@@ -30,8 +34,8 @@ export default function TeamScore({
         <p>{goalAway}</p>
       </div>
       <div className=" flex flex-col space-y-2">
-        <Button additionalClass="bg-sky-600 " content={randomOne} />
-        <Button additionalClass="bg-sky-600 " content={randomTwo} />
+        <Button additionalClass="bg-sky-600 " content={randomHome.toFixed(2)} />
+        <Button additionalClass="bg-red-600 " content={randomAway.toFixed(2)} />
       </div>
     </section>
   );
