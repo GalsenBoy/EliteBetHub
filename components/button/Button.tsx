@@ -1,13 +1,23 @@
 import React from "react";
 
 type ButtonType = {
-  content?: string;
+  content?: string | number;
+  onClick?: () => void;
   children?: React.ReactNode;
+  additionalClass?: string;
 };
 
-export default function Button({ content, children }: ButtonType) {
+export default function Button({
+  content,
+  children,
+  additionalClass,
+  onClick,
+}: ButtonType) {
   return (
-    <button className="px-4 py-2 rounded-lg bg-sky-600 m-4">
+    <button
+      onClick={onClick}
+      className={`px-4 py-2 rounded-lg ${additionalClass}`}
+    >
       {content ? content : children}
     </button>
   );
