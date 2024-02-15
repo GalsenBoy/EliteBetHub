@@ -1,24 +1,38 @@
+import Button from "@/components/button/Button";
+import TemplateScore from "./TemplateScore";
+import { randomOne, randomTwo } from "@/lib/randonFloat";
+
 type TeamScoreProps = {
-  leagueLogo: string;
-  leagueName: string;
-  goal?: number;
+  leagueLogoHome: string;
+  leagueNameHome: string;
+  leagueLogoAway: string;
+  leagueNameAway: string;
+  goalHome: number;
+  goalAway: number;
 };
 
 export default function TeamScore({
-  leagueLogo,
-  leagueName,
-  goal,
+  leagueLogoHome,
+  leagueNameHome,
+  leagueLogoAway,
+  leagueNameAway,
+  goalHome,
+  goalAway,
 }: TeamScoreProps) {
   return (
-    <div className="flex space-x-3">
-      <img
-        src={leagueLogo}
-        alt=""
-        style={{ width: 25, height: 25, objectFit: "cover" }}
-      />
-      <p>
-        {leagueName} <span>{goal}</span>
-      </p>
-    </div>
+    <section className="flex  space-x-6">
+      <div>
+        <TemplateScore src={leagueLogoHome} content={leagueNameHome} />
+        <TemplateScore src={leagueLogoAway} content={leagueNameAway} />
+      </div>
+      <div>
+        <p className="my-3">{goalHome}</p>
+        <p>{goalAway}</p>
+      </div>
+      <div className=" flex flex-col space-y-2">
+        <Button additionalClass="bg-sky-600 " content={randomOne} />
+        <Button additionalClass="bg-sky-600 " content={randomTwo} />
+      </div>
+    </section>
   );
 }

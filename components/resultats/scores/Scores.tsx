@@ -4,7 +4,7 @@ export default async function Scores() {
   let data;
   try {
     const response = await fetch(
-      "https://v3.football.api-sports.io/fixtures?live=all&results=7",
+      "https://v3.football.api-sports.io/fixtures?live=all&timezone=Europe/London",
       {
         method: "GET",
         headers: {
@@ -26,8 +26,8 @@ export default async function Scores() {
   return (
     <section id="scores">
       <h1 className="text-2xl">Résultats des match en cours</h1>
-      {data["response"].map((item: any) => (
-        <DisplayScores item={item} key={item.fixture_id} />
+      {data["response"].splice(0, 4).map((item: any) => (
+        <DisplayScores item={item} key={item.fixture_i} />
       ))}
     </section>
   );
