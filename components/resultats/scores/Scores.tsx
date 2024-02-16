@@ -24,8 +24,10 @@ export default async function Scores() {
     console.log("====================================");
   }
   return (
-    <section id="scores">
-      <h1 className="text-2xl">Résultats des match en cours</h1>
+    <section id="scores ">
+      <h1 className="text-5xl text-center mb-12">
+        Résultats des match en cours
+      </h1>
       {data["response"].splice(0, 4).map((item: any) => (
         <DisplayScores item={item} key={item.fixture_i} />
       ))}
