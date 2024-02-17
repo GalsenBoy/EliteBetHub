@@ -28,7 +28,7 @@ export default async function Scores() {
       <h1 className="text-5xl text-center mb-12">
         Résultats des match en cours
       </h1>
-      {data["response"].splice(0, 4).map((item: any) => (
+      {data["response"].splice(0, 13).map((item: any) => (
         <DisplayScores item={item} key={item.fixture_i} />
       ))}
     </section>
