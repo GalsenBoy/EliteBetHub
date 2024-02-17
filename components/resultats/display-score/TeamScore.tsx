@@ -1,7 +1,7 @@
 "use client";
 import Button from "@/components/button/Button";
 import TemplateScore from "./TemplateScore";
-import React from "react";
+import React, { useState } from "react";
 import Bet from "./Bet";
 
 type TeamScoreProps = {
@@ -23,11 +23,6 @@ export default function TeamScore({
 }: TeamScoreProps) {
   const randomHome = React.useMemo(() => Math.random() * 10, []);
   const randomAway = React.useMemo(() => Math.random() * 10, []);
-
-  const handleHome = () => {
-    console.log(randomHome * 100);
-  };
-  // const montant = handleHome();
 
   return (
     <section className="flex space-x-6">
