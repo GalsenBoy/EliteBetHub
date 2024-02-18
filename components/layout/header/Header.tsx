@@ -9,7 +9,7 @@ export default async function Header() {
   return (
     <header>
       <div id="header-container">
-        <h1>EBH</h1>
+        <a href="/">EBH</a>
         <a className="text-xl underline underline-offset-2" href="/historique">
           Mes historique
         </a>

@@ -1,6 +1,6 @@
 // Bet.tsx
 import { useEffect, useState } from "react";
-// import { Input, Label, Button } from "@/components/ui";
+import { Toaster, toast } from "sonner";
 import {
   Dialog,
   DialogContent,
@@ -8,9 +8,7 @@ import {
   DialogHeader,
   DialogTrigger,
 } from "@/components/ui/dialog";
-// import useStore from '@/store';
 import { DialogDescription, DialogTitle } from "@radix-ui/react-dialog";
-import { useStore } from "@/lib/historique-store";
 import { Button } from "@/components/ui/button";
 import { Label } from "@radix-ui/react-label";
 import { Input } from "@/components/ui/input";
@@ -35,6 +33,7 @@ export default function Bet({ random, leagueName, color }: BetType) {
     if (inputValue && !isNaN(inputValue) && inputValue > 0) {
       setIsActive(true);
     }
+    toast.success("Vous pouvez consulter votre pari dans vos historique");
     const newTicket: ITicket = {
       leagueName: leagueName,
       montant: montantPotentiel,
@@ -52,17 +51,12 @@ export default function Bet({ random, leagueName, color }: BetType) {
 
   return (
     <Dialog>
+      <Toaster richColors />
       <DialogTrigger asChild>
         <Button className={`py-2 px-4 mt-4 ${color}`}>
           {random.toFixed(2)}
         </Button>
       </DialogTrigger>
-      {montantPotentiel > 0 && (
-        <p>
-          Paris sur {leagueName}, gain potentiel :{" "}
-          <span className="text-green-500">{montantPotentiel.toFixed(2)}</span>
-        </p>
-      )}
       <DialogContent className="sm:max-w-[425px] bg-slate-950">
         <DialogHeader>
           <DialogTitle>Vous pariez sur {leagueName}</DialogTitle>
@@ -93,6 +87,7 @@ export default function Bet({ random, leagueName, color }: BetType) {
             content={"Parier"}
             className="py-2 px-2 bg-green-500"
             onClick={handleActive}
+            disabled={isActive ? true : undefined}
           >
             Parier
           </Button>
