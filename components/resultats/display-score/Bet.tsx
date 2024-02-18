@@ -1,17 +1,19 @@
-"use client";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+// Bet.tsx
+import { useEffect, useState } from "react";
+// import { Input, Label, Button } from "@/components/ui";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogFooter,
   DialogHeader,
-  DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import Button from "@/components/button/Button";
-import { useState } from "react";
+// import useStore from '@/store';
+import { DialogDescription, DialogTitle } from "@radix-ui/react-dialog";
+import { useStore } from "@/lib/historique-store";
+import { Button } from "@/components/ui/button";
+import { Label } from "@radix-ui/react-label";
+import { Input } from "@/components/ui/input";
 
 type BetType = {
   random: number;
@@ -20,27 +22,40 @@ type BetType = {
 };
 
 export default function Bet({ random, leagueName, color }: BetType) {
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState<number>(0);
   const [isActive, setIsActive] = useState(false);
+  const [tickets, setTickets] = useState<ITicket[]>([]);
 
-  const handleInputChange = (e: any) => {
-    setInputValue(e.target.value);
+  const montantPotentiel = inputValue * random;
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(Number(e.target.value));
   };
-
   const handleActive = () => {
-    if (inputValue) {
+    if (inputValue && !isNaN(inputValue) && inputValue > 0) {
       setIsActive(true);
     }
+    const newTicket: ITicket = {
+      leagueName: leagueName,
+      montant: montantPotentiel,
+    };
+    const updatedTickets = [...tickets, newTicket];
+    setTickets(updatedTickets);
+    localStorage.setItem("tickets", JSON.stringify(updatedTickets));
   };
-  const montantPotentiel = parseInt(inputValue) * random;
+  useEffect(() => {
+    const storedTickets = localStorage.getItem("tickets");
+    if (storedTickets) {
+      setTickets(JSON.parse(storedTickets));
+    }
+  }, []);
 
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button
-          content={random.toFixed(2)}
-          additionalClass={`py-2 px-4 mt-4 ${color}`}
-        />
+        <Button className={`py-2 px-4 mt-4 ${color}`}>
+          {random.toFixed(2)}
+        </Button>
       </DialogTrigger>
       {montantPotentiel > 0 && (
         <p>
@@ -54,7 +69,7 @@ export default function Bet({ random, leagueName, color }: BetType) {
           <DialogDescription className="mt-5 fontsemibold">
             Votre gain potentiel est de :{" "}
             <span className="text-green-500">
-              {!montantPotentiel ? 0 : montantPotentiel}
+              {!montantPotentiel ? 0 : montantPotentiel.toFixed(2)}
             </span>
           </DialogDescription>
         </DialogHeader>
@@ -76,9 +91,11 @@ export default function Bet({ random, leagueName, color }: BetType) {
           <Button
             type="submit"
             content={"Parier"}
-            additionalClass="py-2 px-2 bg-green-500"
+            className="py-2 px-2 bg-green-500"
             onClick={handleActive}
-          />
+          >
+            Parier
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

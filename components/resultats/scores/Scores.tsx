@@ -4,7 +4,7 @@ export default async function Scores() {
   let data;
   try {
     const response = await fetch(
-      "https://v3.football.api-sports.io/fixtures?live=all&timezone=Europe/London",
+      "https://v3.football.api-sports.io/fixtures?live=all&timezone=Europe/London&timezone=Europe/Madrid&timezone=Europe/Rome&timezone=Europe/Paris&timezone=Europe/Istanbul",
       {
         method: "GET",
         headers: {

@@ -1,5 +1,5 @@
 "use client";
-import Button from "@/components/button/Button";
+// import Button from "@/components/button/Button";
 import TemplateScore from "./TemplateScore";
 import React, { useState } from "react";
 import Bet from "./Bet";
