@@ -11,7 +11,7 @@ export default async function Header() {
       <div id="header-container">
         <a href="/">EBH</a>
         <a className="text-xl underline underline-offset-2" href="/historique">
-          Mes historique
+          Mon historique
         </a>
         {session ? (
           <div>
