@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import DisplayScores from "../display-score/DisplayScores";
 import "./scores.scss";
 export default async function Scores() {
@@ -25,9 +26,13 @@ export default async function Scores() {
   }
   return (
     <section id="scores ">
-      <h1 className="text-5xl text-center mb-12">
+      <h1 className="text-5xl text-center font-semibold mb-12">
         Résultats des match en cours
       </h1>
+      <h2 className="text-3xl text-center my-6 text-yellow-400">
+        ⚠️Vous n'avez pas la possibilité d'avoir un ticket combiné pour le
+        moment
+      </h2>
       {data["response"].splice(0, 13).map((item: any) => (
         <DisplayScores item={item} key={item.fixture_i} />
       ))}
